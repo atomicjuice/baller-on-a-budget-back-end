@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def sign_in
     user=User.find_by(username: params[:username])
 
-    if user && user.authenticate(params[:password])
+    if user && user.password
       render json: {username: user.username}
     else
       render json: {message: "Invalid username/password"}
