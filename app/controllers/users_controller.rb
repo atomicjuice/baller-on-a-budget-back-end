@@ -5,11 +5,32 @@ class UsersController < ApplicationController
     user=User.find_by(username: params[:username])
 
     if user && user.password
-      render json: {username: user.username}
+      render json: {username: user.username, id: user.id}
     else
       render json: {message: "Invalid username/password"}
     end
 
+  end
+  
+
+  def weekly_budget
+
+    user=User.find_by(params[:id])
+    total_income_by_monthly=user.incomes.select{|income| income.frequency=="monthly"}.map{|income| income.amount}.sum
+    total_income_by_weekly=user.incomes.select{|income| income.frequency=="weekly"}.map{|income| income.amount}.sum
+    monthly_to_weekly_income_breakdown=total_income_by_monthly/4
+
+    weekly_income_total = monthly_to_weekly_income_breakdown + total_income_by_weekly
+
+    total_expenses_by_monthly=user.expenses.select{|expense| expense.frequency=="monthly"}.map{|expense| expense.amount}.sum
+    total_expenses_by_weekly=user.expenses.select{|expense| expense.frequency=="weekly"}.map{|expense| expense.amount}.sum
+    monthly_to_weekly_expenses_breakdown=total_expenses_by_monthly/4
+
+    weekly_expense_total= monthly_to_weekly_expenses_breakdown + total_expenses_by_weekly
+
+    budget= weekly_income_total - weekly_expense_total
+
+    render json:{weekly_budget: budget}
   end
 
   # GET /users

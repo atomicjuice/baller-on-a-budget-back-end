@@ -13,10 +13,10 @@ Budget.delete_all
 
 users = User.create([{username: 'a', password:'pass'}])
 
-income = Income.create([{ user_id:1, name: 'job', amount: 500, frequency: 'weekly' }])
+income = Income.create([{ user_id:1, name: 'job', amount: 1500, frequency: 'monthly' }])
 
-expenses = Expense.create([{ user_id:1, name: 'rent', amount: 250, frequency: 'weekly' }])
+expenses = Expense.create([{ user_id:1, name: 'rent', amount: 800, frequency: 'monthly' }])
 
-budget = Budget.create({user_id:1, amount: 0})
+budget = Budget.create({user_id:1, amount: nil})
 
 
