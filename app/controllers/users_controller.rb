@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   end
   
 
+  # POST
   def weekly_budget
 
     user=User.find_by(params[:id])
@@ -30,7 +31,16 @@ class UsersController < ApplicationController
 
     budget= weekly_income_total - weekly_expense_total
 
-    render json:{weekly_budget: budget}
+    render json:{weekly_budget: budget, weekly_income: weekly_income_total, weekly_expense: weekly_expense_total}
+  end
+
+  def all_user_income
+    # user=User.find_by(params[:id])
+
+    user = User.first
+    all_income=user.incomes
+
+    render json:{all_income: all_income}
   end
 
   # GET /users

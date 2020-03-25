@@ -9,5 +9,8 @@ Rails.application.routes.draw do
    post "/signup", to: "users#create"
    post "/income-form", to: "incomes#create"
    post "/expense-form", to: "expenses#create"
-   get "/user-main-page/:id", to: "users#weekly_budget"
+   post "/user-main-page", to: "users#weekly_budget"
+   get "/all-income", to: "users#all_user_income"
+   patch "/income-form/:id", to: "incomes#update"
+   get '/income-form/:id', to: "incomes#show"
 end
