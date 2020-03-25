@@ -36,6 +36,7 @@ class IncomesController < ApplicationController
   # DELETE /incomes/1
   def destroy
     @income.destroy
+    render json: {message: "deleted"}
   end
 
   private

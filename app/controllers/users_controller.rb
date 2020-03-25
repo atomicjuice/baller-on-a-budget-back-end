@@ -43,6 +43,14 @@ class UsersController < ApplicationController
     render json:{all_income: all_income}
   end
 
+  def all_user_expenses
+
+    user = User.first
+    all_expenses=user.expenses
+
+    render json:{all_expenses: all_expenses}
+  end
+
   # GET /users
   def index
     @users = User.all

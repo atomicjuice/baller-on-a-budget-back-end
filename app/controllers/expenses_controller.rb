@@ -36,6 +36,7 @@ class ExpensesController < ApplicationController
   # DELETE /expenses/1
   def destroy
     @expense.destroy
+    render json: {message: "deleted"}
   end
 
   private
